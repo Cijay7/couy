@@ -94,10 +94,10 @@ void sendSensor()
 
 BLYNK_WRITE(V5)
 {
-  
-  servoku.write(Posisi);
   Posisi = param.asInt();
+  servoku.write(Posisi);
   Blynk.virtualWrite(V5, Posisi);
+ 
 }
 
 void setup()
