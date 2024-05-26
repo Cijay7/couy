@@ -48,6 +48,20 @@ void sendSensor()
   Blynk.virtualWrite(V0, data.temperature); 
   Blynk.virtualWrite(V1, data.humidity);
   Blynk.virtualWrite(V2, lux);
+  if (lux < 600){
+    servoku.write(90); // Menggerakkan servo ke posisi 90 derajat
+  }
+  if (data.temperature > 60) {
+    
+  } else {
+    servoku.write(0); // Menggerakkan servo ke posisi 0 derajat
+  }
+  if (data.temperature)
+  {
+    servoku.write(90); // Menggerakkan servo ke posisi 90 derajat
+  } else {
+    servoku.write(0); // Menggerakkan servo ke posisi 0 derajat
+    
 }
 
   
