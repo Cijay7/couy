@@ -1,7 +1,7 @@
 #define BLYNK_PRINT Serial
-#define BLYNK_TEMPLATE_ID "TMPL6ulHDw8yD"
-#define BLYNK_TEMPLATE_NAME "TA Sistem Tertanam"
-#define BLYNK_AUTH_TOKEN "u_PbudiVMxjX7RQ1PqOEa1YweEWFYwzL"
+#define BLYNK_TEMPLATE_ID "TMPL67H05vuh1"
+#define BLYNK_TEMPLATE_NAME "jir"
+#define BLYNK_AUTH_TOKEN "zf4w9bRq4b2nbqyAS1d-IVOFMAFWJO9w"
 
 #include <WiFi.h>
 #include <WiFiClient.h>
@@ -48,48 +48,47 @@ void sendSensor()
   Blynk.virtualWrite(V0, data.temperature);
   Blynk.virtualWrite(V1, data.humidity);
   Blynk.virtualWrite(V2, lux);
-  if (temperature < 35) {
-    if (humidity > 60) {
+  if (data.temperature < 35) {
+    if (data.humidity > 60) {
       if (lux > 300) {
-        myservo.write(0); // Posisi 180 derajat
+        servoku.write(0); // Posisi 180 derajat
         Serial.println("Suhu < 35C, Kelembapan > 60%, Lux > 300: Servo ke posisi 0 derajat.");
       } else {
-        myservo.write(90); // Posisi 135 derajat
+        servoku.write(90); // Posisi 135 derajat
         Serial.println("Suhu < 35C, Kelembapan > 60%, Lux <= 300: Servo ke posisi 90 derajat.");
       }
     } else {
       if (lux < 300) {
-        myservo.write(90); // Posisi 90 derajat
+        servoku.write(90); // Posisi 90 derajat
         Serial.println("Suhu < 35C, Kelembapan <= 60%, Lux < 300: Servo ke posisi 90 derajat.");
       } else {
-        myservo.write(0); // Posisi 45 derajat
-        Serial.println("Suhu < 35C, Kelembapan <= 60%, Lux >= 300: Servo ke posisi 45 derajat.");
+        servoku.write(0); // Posisi 45 derajat
+        Serial.println("Suhu < 35C, Kelembapan <= 60%, Lux >= 300: Servo ke posisi 0 derajat.");
       }
     }
   } else {
-    if (temperature > 35) {
+    if (data.temperature > 35) {
       if (lux > 300) {
-        myservo.write(90); // Posisi 135 derajat
-        Serial.println("Suhu <= 35C, Kelembapan > 60%, Lux > 300: Servo ke posisi 135 derajat.");
+        servoku.write(0); // Posisi 135 derajat
+        Serial.println("Suhu > 35C, Kelembapan > 60%, Lux > 300: Servo ke posisi 90 derajat.");
       } else {
-        myservo.write(0); // Posisi 90 derajat
-        Serial.println("Suhu <= 35C, Kelembapan > 60%, Lux <= 300: Servo ke posisi 90 derajat.");
+        servoku.write(90); // Posisi 90 derajat
+        Serial.println("Suhu > 35C, Kelembapan > 60%, Lux <= 300: Servo ke posisi 0 derajat.");
       }
     }
   }
-
   // Logika untuk mengontrol pompa berdasarkan kelembaban
-  if (data.humidity < 60)
+  if (data.humidity <= 60)
   {
     digitalWrite(Relay, HIGH);
     Serial.println("Pompa HIDUP (kelembaban di bawah 60%)");
-    Blynk.virtualWrite(V4, "HIDUP");
+    Blynk.virtualWrite(V4, Relay);
   }
-  else if (data.humidity > 80)
+  else if (data.humidity >= 80)
   {
     digitalWrite(Relay, LOW);
     Serial.println("Pompa MATI (kelembaban di atas 80%)");
-    Blynk.virtualWrite(V4, "MATI");
+    Blynk.virtualWrite(V4, Relay);
   }
 }
 
