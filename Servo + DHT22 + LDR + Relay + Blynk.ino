@@ -82,13 +82,13 @@ void sendSensor()
   {
     digitalWrite(Relay, HIGH);
     Serial.println("Pompa HIDUP (kelembaban di bawah 60%)");
-    Blynk.virtualWrite(V4, Relay);
+    Blynk.virtualWrite(V4, 1);
   }
   else if (data.humidity >= 80)
   {
     digitalWrite(Relay, LOW);
     Serial.println("Pompa MATI (kelembaban di atas 80%)");
-    Blynk.virtualWrite(V4, Relay);
+    Blynk.virtualWrite(V4, 0);
   }
 }
 
