@@ -48,8 +48,9 @@ void sendSensor()
   Blynk.virtualWrite(V0, data.temperature); 
   Blynk.virtualWrite(V1, data.humidity);
   Blynk.virtualWrite(V2, lux);
+}
 
-
+  
 BLYNK_WRITE (V3)
 }
  // Logika untuk mengontrol pompa berdasarkan kelembaban
