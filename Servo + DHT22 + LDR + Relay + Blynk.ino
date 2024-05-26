@@ -60,10 +60,10 @@ void sendSensor()
     } else {
       if (lux < 300) {
         servoku.write(90); // Posisi 90 derajat
-        Serial.println("Suhu < 35C, Kelembapan <= 60%, Lux < 300: Servo ke posisi 90 derajat.");
+        Serial.println("Suhu < 35C, Kelembapan < 60%, Lux < 300: Servo ke posisi 90 derajat.");
       } else {
         servoku.write(0); // Posisi 45 derajat
-        Serial.println("Suhu < 35C, Kelembapan <= 60%, Lux >= 300: Servo ke posisi 0 derajat.");
+        Serial.println("Suhu < 35C, Kelembapan < 60%, Lux >= 300: Servo ke posisi 0 derajat.");
       }
     }
   } else {
@@ -94,8 +94,10 @@ void sendSensor()
 
 BLYNK_WRITE(V5)
 {
-  Posisi = param.asInt();
+  
   servoku.write(Posisi);
+  Posisi = param.asInt();
+  Blynk.virtualWrite(V5, Posisi);
 }
 
 void setup()
