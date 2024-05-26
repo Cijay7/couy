@@ -48,21 +48,21 @@ void sendSensor()
   Blynk.virtualWrite(V0, data.temperature); 
   Blynk.virtualWrite(V1, data.humidity);
   Blynk.virtualWrite(V2, lux);
-}
+
 
 BLYNK_WRITE (V3)
-{
-  SW_State = param.asInt();
-  if (SW_State == 1)
+}
+ // Logika untuk mengontrol pompa berdasarkan kelembaban
+  if (data.humidity < 60)
   {
     digitalWrite(Relay, HIGH);
-    Serial.println("Pompa HIDUP");
+    Serial.println("Pompa HIDUP (kelembaban di bawah 60%)");
     Blynk.virtualWrite(V4, "HIDUP");
   }
-  else
+  else if (data.humidity > 80)
   {
     digitalWrite(Relay, LOW);
-    Serial.println("Pompa MATI");
+    Serial.println("Pompa MATI (kelembaban di atas 80%)");
     Blynk.virtualWrite(V4, "MATI");
   }
 }
