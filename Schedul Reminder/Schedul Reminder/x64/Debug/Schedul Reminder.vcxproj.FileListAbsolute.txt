@@ -1,0 +1,4 @@
+C:\Users\ASUS\source\repos\Schedul Reminder\Schedul Reminder\x64\Debug\Schedul Reminder.vcxproj.AssemblyReference.cache
+C:\Users\ASUS\source\repos\Schedul Reminder\Schedul Reminder\x64\Debug\SchedulReminder.MyForm.resources
+C:\Users\ASUS\source\repos\Schedul Reminder\Schedul Reminder\x64\Debug\Schedul Reminder.vcxproj.GenerateResource.cache
+C:\Users\ASUS\source\repos\Schedul Reminder\Schedul Reminder\x64\Debug\Schedul Reminder.vcxproj.ResolveComReference.cache
